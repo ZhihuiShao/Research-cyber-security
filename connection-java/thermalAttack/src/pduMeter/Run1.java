@@ -1,5 +1,7 @@
 package pduMeter;
-
+/*
+test class for PDU meter
+ */
 public class Run1 {
 	public static void main(String[] args) {
 		String filePath = "D:/thermalAttackData/Jan31/";

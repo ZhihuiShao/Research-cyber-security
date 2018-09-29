@@ -5,7 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/*
+1. implement one class for APC PDU connection,
+2. this class can collection the power of each outlet port for each second
+3. store it into the file at runtime.
+ */
 public class MyPduThread extends Thread{
 	private String ip;
 	private String username;
@@ -15,8 +19,8 @@ public class MyPduThread extends Thread{
 	public MyPduThread(String ip,String outFileName, int maxSampleNumbe) {
 		// TODO Auto-generated constructor stub
 		this.ip = ip;
-		this.username = "apc";
-		this.password = "apc";
+		this.username = "apc";//default for apc equipment
+		this.password = "apc";//default for apc equipment
 		this.outFileName = outFileName;
 		this.maxSampleNumber = maxSampleNumbe;
 		

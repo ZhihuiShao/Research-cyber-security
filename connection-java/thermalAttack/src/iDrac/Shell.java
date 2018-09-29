@@ -9,7 +9,9 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
-
+/*
+implement basic ssh shell for iDracThread and VMThread
+ */
 public class Shell {
     private String ip;
     private String username;

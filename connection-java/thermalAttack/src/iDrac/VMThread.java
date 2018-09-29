@@ -5,7 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+/*
+this VM thread implement how to interact with ubuntu in dell server
+ */
 public class VMThread extends Thread{
 	private String ip;
 	private String username;
@@ -15,8 +17,8 @@ public class VMThread extends Thread{
 	public VMThread(String ip, String outFileName, int maxSampleNumbe) {
 		// TODO Auto-generated constructor stub
 		this.ip=ip;
-		this.username = "root";
-		this.password = "srenserver";
+		this.username = "****";//replace with your username
+		this.password = "*******";//replace with your password
 		this.outFileName = outFileName;
 		this.maxSampleNumber = maxSampleNumbe;
 	}
@@ -24,12 +26,12 @@ public class VMThread extends Thread{
 	public void run(){
 		System.out.println(ip+": started!");
 		//#2===execute
-        String CPUcommand = "dmidecode --type processor | grep -i speed";
-        String RAMcommand = "dmidecode --type memory | grep -i speed";
+        String CPUcommand = "dmidecode --type processor | grep -i speed";//get processor information
+        String RAMcommand = "dmidecode --type memory | grep -i speed";//get memory information
         String HDDcommand = "sudo hdparm -t /dev/sda";
         Shell shell = new Shell(ip,username,password);
         Date now = null;
-    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");//get local time
     	String myTime=null;
     	BufferedWriter fileOut=null;
 //    	try {

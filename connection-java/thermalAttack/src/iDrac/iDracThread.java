@@ -6,18 +6,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+/*
+1. this java class is used for connection with iDRAC module of dell server
+(iDRAC: https://www.dell.com/support/contents/us/en/04/article/product-support/self-support-knowledgebase/enterprise-resource-center/systemsmanagement/idrac)
+2. it can get all the information of sensors in iDRAC module and store it into .txt file
+ */
 
 public class iDracThread extends Thread{
-	private String ip;
-	private String username;
-	private String password;
-	private String outFileName;
-	private int maxSampleNumber;
+	private String ip;//ip address of the iDRAC module
+	private String username;//username
+	private String password;//password
+	private String outFileName;//output file path and name
+	private int maxSampleNumber;//each information colelction ~1s, so this is the collection time
 	public iDracThread(String ip, String outFileName, int maxSampleNumbe) {
 		// TODO Auto-generated constructor stub
 		this.ip=ip;
-		this.username = "root";
-		this.password = "srenserver";
+		this.username = "****";//replace with your username
+		this.password = "*****";//replace with your password
 		this.outFileName = outFileName;
 		this.maxSampleNumber = maxSampleNumbe;
 	}
@@ -25,7 +30,7 @@ public class iDracThread extends Thread{
 	public void run(){
 		System.out.println(ip+": started!");
 		//#2===execute
-        String command = "racadm getsensorinfo";
+        String command = "racadm getsensorinfo";//command to get all sensor information
         Shell shell = new Shell(ip,username,password);
         Date now = null;
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -55,7 +60,7 @@ public class iDracThread extends Thread{
         ArrayList<String> stdout = shell.getStandardOutput();
         now = new Date();
         myTime = sdf.format(now);
-        //new method to parse string via stream
+        //new method to parse string via stream, here we parse all the sensor information
         String bTemp = stdout.stream().filter(s -> s.startsWith("System Board Inlet Temp")).toArray(size -> new String[size])[0].split("Ok|C ")[1].trim();
 		String CPUTemp = stdout.stream().filter(s -> s.startsWith("CPU1 Temp")).toArray(size -> new String[size])[0].split("Ok|C ")[1].trim();
 		String bPower = stdout.stream().filter(s -> s.startsWith("System Board Pwr Consumption")).toArray(size -> new String[size])[0].split("Ok|Watts ")[1].trim();

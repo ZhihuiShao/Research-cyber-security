@@ -4,6 +4,9 @@ import org.apache.commons.net.telnet.TelnetClient;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+/*
+telnet shell for APC outlet with ethenet connection, here default setting of APC outlet is used
+ */
 
 public class AutomatedTelnetClient {
 	private TelnetClient telnet = new TelnetClient();
@@ -19,9 +22,9 @@ public class AutomatedTelnetClient {
 			in = telnet.getInputStream();
 			out = new PrintStream(telnet.getOutputStream());
 			// Log the user on
-			readUntil("User Name : ");
+			readUntil("User Name : ");//this is default
 			write(user);
-			readUntil("Password  : ");
+			readUntil("Password  : ");//this is default
 			write(password);
 			
 			// Advance to a prompt
